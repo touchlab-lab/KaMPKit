@@ -161,10 +161,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework"
+  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework.dSYM"
   install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework"
   install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework.dSYM"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework"
+  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework.dSYM"
   install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework"
   install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework.dSYM"
 fi

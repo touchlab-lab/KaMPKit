@@ -5,3 +5,5 @@ actual fun currentTimeMillis(): Long = System.currentTimeMillis()
 internal actual fun printThrowable(t: Throwable) {
     t.printStackTrace()
 }
+
+actual fun currentPlatform(): String = "Android"

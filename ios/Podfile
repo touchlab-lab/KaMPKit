@@ -6,4 +6,5 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'KaMPStarteriOS' do
     pod 'shared', :path => '../shared/'
+    pod 'secondlib', :path => '../secondlib/'
 end

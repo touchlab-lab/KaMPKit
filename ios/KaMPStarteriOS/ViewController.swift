@@ -8,6 +8,7 @@
 
 import UIKit
 import shared
+import secondlib
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -32,6 +33,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //We check for stalk data in this method
         model!.getBreedsFromNetwork()
+        PlatformiOSKt.currentTimeMillis()
+        PlatformiOSKt.currentPlatform()
+        let test = PlatformiOSKt.currentPlatform()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
