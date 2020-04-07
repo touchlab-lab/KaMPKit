@@ -34,8 +34,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //We check for stalk data in this method
         model!.getBreedsFromNetwork()
         PlatformiOSKt.currentTimeMillis()
-        PlatformiOSKt.currentPlatform()
-        let test = PlatformiOSKt.currentPlatform()
+        let test1 = shared.PlatformiOSKt.currentPlatform()
+        let test2 = secondlib.PlatformiOSKt.currentPlatform()
+        
+        //PlatformiOSKt.currentPlatform()
+        //let test = PlatformiOSKt.currentPlatform()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
