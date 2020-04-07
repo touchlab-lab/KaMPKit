@@ -6,6 +6,8 @@
 
 ***Welcome to the KaMP Kit!*** 
 
+## [Do Not Merge] This branch is here to just show two libraries working in KMP.
+
 ## About
 
 ### Goal
