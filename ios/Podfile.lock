@@ -13,8 +13,8 @@ EXTERNAL SOURCES:
     :path: "../shared/"
 
 SPEC CHECKSUMS:
-  secondlib: b5968a9cb3f4c1635e8a0d9c1061ca2b93a0c6af
-  shared: 771eb98a53925ecb27cf05ee1474350cbce85589
+  secondlib: 46c31ce90b975b85442644e81fd556d27f4e06b3
+  shared: ab00ee14008296a1fc24273e914ef7b680340189
 
 PODFILE CHECKSUM: aee341fabbc1c3b750ca94330aa80a34900ab067
 

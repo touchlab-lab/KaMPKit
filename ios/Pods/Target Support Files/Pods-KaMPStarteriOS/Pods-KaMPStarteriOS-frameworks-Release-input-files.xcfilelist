@@ -1,5 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-KaMPStarteriOS/Pods-KaMPStarteriOS-frameworks.sh
-${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework
-${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework.dSYM
-${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework
-${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework.dSYM
+${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework
+${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework.dSYM
+${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework
+${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework.dSYM

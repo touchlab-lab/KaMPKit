@@ -161,16 +161,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework"
-  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework.dSYM"
-  install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework"
-  install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework.dSYM"
+  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework"
+  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework.dSYM"
+  install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework"
+  install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework.dSYM"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework"
-  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/secondlib.framework.dSYM"
-  install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework"
-  install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework.dSYM"
+  install_framework "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework"
+  install_dsym "${PODS_ROOT}/../../secondlib/build/cocoapods/framework/SecondLib.framework.dSYM"
+  install_framework "${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework"
+  install_dsym "${PODS_ROOT}/../../shared/build/cocoapods/framework/Shared.framework.dSYM"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -51,7 +51,7 @@ kotlin {
         implementation(Deps.multiplatformSettings)
         implementation(Deps.koinCore)
         implementation(Deps.ktor.commonSerialization)
-
+        implementation(project(":secondlib"))
     }
 
     sourceSets["commonTest"].dependencies {
@@ -97,6 +97,7 @@ kotlin {
         summary = "Common library for the KaMP starter kit"
         homepage = "https://github.com/touchlab/KaMPStarter"
         isStatic = false
+        frameworkName = "Shared"
     }
 }
 

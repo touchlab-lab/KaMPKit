@@ -9,7 +9,7 @@
   "authors": "",
   "license": "",
   "summary": "Common library for the KaMP starter kit",
-  "vendored_frameworks": "build/cocoapods/framework/secondlib.framework",
+  "vendored_frameworks": "build/cocoapods/framework/SecondLib.framework",
   "libraries": "c++",
   "module_name": "secondlib_umbrella",
   "pod_target_xcconfig": {

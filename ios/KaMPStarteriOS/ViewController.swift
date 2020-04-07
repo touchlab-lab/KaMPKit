@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import shared
-import secondlib
-
+import Shared
+import SecondLib
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var breedTableView: UITableView!
@@ -34,8 +33,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //We check for stalk data in this method
         model!.getBreedsFromNetwork()
         PlatformiOSKt.currentTimeMillis()
-        let test1 = shared.PlatformiOSKt.currentPlatform()
-        let test2 = secondlib.PlatformiOSKt.currentPlatform()
+        let test1 = Shared.PlatformiOSKt.currentPlatform()
+        let test2 = Shared.PlatformiOSKt.currentPlatform()
+        
+        let counter = Shared.PlatformKt.createAndIncrement()
+        let counter2 = SecondLib.CounterTest()
+        
+        Shared.PlatformKt.incrementCounter(counter: counter)
+        if(counter == counter2){
+            print("TEST")
+        }
+        
+        SecondLib.PlatformKt.addTwo(int: Shared.PlatformKt.addTwo(int: 2))
+        SecondLib.PlatformKt.addString(string: Shared.PlatformKt.addString(string: "Hello"))
+        
+        let temp = SecondLib.KotlinBoolean.init(bool: true)
+        let temp2 = Shared.KotlinBoolean.init(bool: true)
+        if(temp == temp2){
+            print("TEST")
+        }
         
         //PlatformiOSKt.currentPlatform()
         //let test = PlatformiOSKt.currentPlatform()

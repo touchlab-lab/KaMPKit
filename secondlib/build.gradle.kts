@@ -64,5 +64,6 @@ kotlin {
         summary = "Common library for the KaMP starter kit"
         homepage = "https://github.com/touchlab/KaMPStarter"
         isStatic = false
+        frameworkName = "SecondLib"
     }
 }

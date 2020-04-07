@@ -54,8 +54,8 @@
 
 /* Begin PBXFileReference section */
 		46EB2E000000D0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		46EB2E000000F0 /* secondlib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = secondlib.framework; path = build/cocoapods/framework/secondlib.framework; sourceTree = "<group>"; };
-		46EB2E00000110 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = build/cocoapods/framework/shared.framework; sourceTree = "<group>"; };
+		46EB2E000000F0 /* SecondLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecondLib.framework; path = build/cocoapods/framework/SecondLib.framework; sourceTree = "<group>"; };
+		46EB2E00000110 /* Shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shared.framework; path = build/cocoapods/framework/Shared.framework; sourceTree = "<group>"; };
 		46EB2E00000130 /* secondlib.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = secondlib.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E00000150 /* shared.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = shared.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E000001B0 /* secondlib.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = secondlib.xcconfig; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 		46EB2E000000E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000000F0 /* secondlib.framework */,
+				46EB2E000000F0 /* SecondLib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 		46EB2E00000100 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000110 /* shared.framework */,
+				46EB2E00000110 /* Shared.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
