@@ -19,3 +19,31 @@ class CounterTest {
         index++
     }
 }
+
+fun incrementCounterArray(counters: Array<Int>) : Array<Int>{
+    counters.forEachIndexed { index, i ->
+        counters[index] = i + 1
+    }
+    return counters
+}
+
+fun incrementCounterList(counters: List<Int>) : List<Int> {
+    counters.forEachIndexed { index, i ->
+        print("TEST")
+    }
+    return counters
+}
+
+fun incrementCounterMutableList(counters: MutableList<Int>) : MutableList<Int> {
+    counters.forEachIndexed { index, i ->
+        counters[index] = i + 1
+    }
+    return counters
+}
+
+fun incrementCounterMutableMap(counters: MutableMap<String,Int>) : MutableMap<String,Int> {
+    counters.forEach {
+        counters[it.key] = it.value + 1
+    }
+    return counters
+}

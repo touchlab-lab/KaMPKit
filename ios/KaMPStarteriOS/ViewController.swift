@@ -53,6 +53,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("TEST")
         }
         
+        let array = Shared.KotlinArray<Shared.KotlinInt>();
+        Shared.PlatformKt.incrementCounterArray(counters: array)
+        SecondLib.PlatformKt.incrementCounterArray(counters: array)
+        
+        Shared.PlatformKt.incrementCounterList(counters: )
+        SecondLib.PlatformKt.incrementCounterList(counters:)
+        
+        Shared.PlatformKt.incrementCounterMutableList(counters: )
+        SecondLib.PlatformKt.incrementCounterMutableList(counters:)
+        
+        Shared.PlatformKt.incrementCounterMutableMap(counters: )
+        SecondLib.PlatformKt.incrementCounterMutableMap(counters:)
         //PlatformiOSKt.currentPlatform()
         //let test = PlatformiOSKt.currentPlatform()
     }
