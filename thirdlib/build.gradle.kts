@@ -22,27 +22,15 @@ android {
 kotlin {
     android()
 
-    /*
-    //Revert to just ios() when gradle plugin can properly resolve it
-    val onPhone = System.getenv("SDK_NAME")?.startsWith("iphoneos")?:false
-    if(onPhone){
-        iosArm64("ios")
-    }else{
-        iosX64("ios")
-    }
-
-    // Create and configure the targets.
-    val ios32 = iosArm32("ios32")
-    val ios64 = iosArm64("ios64")
     val iosX64 = iosX64("iosX64")
 
-    configure(listOf(ios32, ios64, iosX64)) {
+    configure(listOf(iosX64)) {
         binaries.framework {
-            baseName = "SecondLib"
+            baseName = "ThirdLib"
             isStatic = true
 
         }
-    }*/
+    }
 
     val buildForDevice = project.findProperty("device") as? Boolean ?: false
     val iosTarget = if(buildForDevice) iosArm64("ios") else iosX64("ios")
@@ -52,6 +40,7 @@ kotlin {
             if (!buildForDevice) {
                 embedBitcode("disable")
             }
+            isStatic = true
         }
     }
 
@@ -59,14 +48,6 @@ kotlin {
         listOf("-Xobjc-generics", "-Xg0")
 
     version = "1.1"
-
-    sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
-    }
 
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib-common", Versions.kotlin))
@@ -86,40 +67,13 @@ kotlin {
     sourceSets["iosMain"].dependencies {
 
     }
-/*
-    cocoapodsext {
-        summary = "Common library for the KaMP starter kit"
-        homepage = "https://github.com/touchlab/KaMPStarter"
-        isStatic = true
-        frameworkName = "ThirdLib"
-    }
-*/
 
-    /*
     tasks.create("debugFatFramework", org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask::class) {
-        baseName = "SecondLib"
+        baseName = "ThirdLib"
         destinationDir = buildDir.resolve("fat-framework/debug")
         from(
-            ios32.binaries.getFramework("DEBUG"),
-            ios64.binaries.getFramework("DEBUG"),
             iosX64.binaries.getFramework("DEBUG")
         )
-    }*/
-
-    tasks.register("copyFramework") {
-        val buildType = project.findProperty("kotlin.build.type") as? String ?: "DEBUG"
-        dependsOn("link${buildType.toLowerCase().capitalize()}FrameworkIos")
-
-        doLast {
-            val srcFile = (kotlin.targets["ios"] as KotlinNativeTarget).binaries.getFramework(buildType).outputFile
-            val targetDir = project.property("configuration.build.dir")!!
-            copy {
-                from(srcFile.parent)
-                into(targetDir)
-                include( "thirdlib.framework/**")
-                include("thirdlib.framework.dSYM")
-            }
-        }
     }
 }
 
