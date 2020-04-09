@@ -20,7 +20,7 @@ android {
 }
 
 kotlin {
-    android("androidLib")
+    android()
 
     /*
     //Revert to just ios() when gradle plugin can properly resolve it
@@ -52,8 +52,6 @@ kotlin {
             if (!buildForDevice) {
                 embedBitcode("disable")
             }
-            isStatic = true
-
         }
     }
 
@@ -77,6 +75,14 @@ kotlin {
 
     sourceSets["commonTest"].dependencies {
     }
+
+    sourceSets["androidMain"].dependencies {
+        implementation(kotlin("stdlib", Versions.kotlin))
+    }
+
+    sourceSets["androidTest"].dependencies {
+    }
+
     sourceSets["iosMain"].dependencies {
 
     }
@@ -85,9 +91,10 @@ kotlin {
         summary = "Common library for the KaMP starter kit"
         homepage = "https://github.com/touchlab/KaMPStarter"
         isStatic = true
-        frameworkName = "SecondLib"
+        frameworkName = "ThirdLib"
     }
 */
+
     /*
     tasks.create("debugFatFramework", org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask::class) {
         baseName = "SecondLib"
@@ -109,8 +116,8 @@ kotlin {
             copy {
                 from(srcFile.parent)
                 into(targetDir)
-                include( "secondlib.framework/**")
-                include("secondlib.framework.dSYM")
+                include( "thirdlib.framework/**")
+                include("thirdlib.framework.dSYM")
             }
         }
     }

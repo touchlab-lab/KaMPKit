@@ -1,3 +1,1 @@
-package co.touchlab.secondlib
-
-actual fun currentPlatform(): String = "iOS"
+package co.touchlab.thirdlib

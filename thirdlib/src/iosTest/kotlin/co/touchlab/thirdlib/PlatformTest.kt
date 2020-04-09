@@ -1,4 +1,4 @@
-package co.touchlab.thirdlib
+package co.touchlab.secondlib
 
 import kotlinx.coroutines.runBlocking
 
