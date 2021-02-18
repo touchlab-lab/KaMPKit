@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
-    id("co.touchlab.native.cocoapods")
+    kotlin("native.cocoapods")
     id("kotlinx-serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
@@ -21,6 +25,8 @@ android {
         isAbortOnError = true
     }
 }
+
+version = "1.0"
 
 kotlin {
     android()
@@ -95,7 +101,7 @@ kotlin {
         implementation(Deps.Ktor.ios)
     }
 
-    cocoapodsext {
+    cocoapods {
         summary = "Common library for the KaMP starter kit"
         homepage = "https://github.com/touchlab/KaMPKit"
         framework {
@@ -109,5 +115,13 @@ kotlin {
 sqldelight {
     database("KaMPKitDb") {
         packageName = "co.touchlab.kampkit.db"
+    }
+}
+
+fun CocoapodsExtension.framework(configuration: Framework.() -> Unit) {
+    kotlin.targets.withType<KotlinNativeTarget> {
+        binaries.withType<Framework> {
+            configuration()
+        }
     }
 }

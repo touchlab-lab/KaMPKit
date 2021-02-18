@@ -7,7 +7,6 @@ object Versions {
     val android_gradle_plugin = "4.0.1"
 
     val buildToolsVersion = "30.0.2"
-    val cocoapodsext = "0.12"
     val coroutines = "1.4.2-native-mt"
     val kermit = "0.1.8"
     val karmok = "0.1.8"
@@ -38,7 +37,6 @@ object Versions {
 
 object Deps {
     val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
-    val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
     val junit = "junit:junit:${Versions.junit}"
     val material = "com.google.android.material:material:${Versions.material}"
     val desugarJdkLibs = "com.android.tools:desugar_jdk_libs:${Versions.desugarJdkLibs}"
