@@ -9,6 +9,7 @@ import co.touchlab.stately.ensureNeverFrozen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flattenMerge
 import kotlinx.coroutines.flow.flowOf
@@ -26,10 +27,12 @@ class NativeViewModel(
 
     private val log: Kermit by inject { parametersOf("BreedModel") }
     private val scope = MainScope(Dispatchers.Main, log)
-    private val breedModel: BreedModel = BreedModel()
+    val breedModel: BreedModel = BreedModel()
     private val _breedStateFlow: MutableStateFlow<DataState<ItemDataSummary>> = MutableStateFlow(
         DataState.Loading
     )
+    val breedStateFlow: StateFlow<DataState<ItemDataSummary>>
+        get() = _breedStateFlow
 
     init {
         ensureNeverFrozen()

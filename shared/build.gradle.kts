@@ -69,6 +69,7 @@ kotlin {
         implementation(Deps.koinCore)
         implementation(Deps.Ktor.commonSerialization)
         implementation(Deps.kotlinxDateTime)
+        implementation(Deps.nativeCoroutines)
         api(Deps.kermit)
     }
 

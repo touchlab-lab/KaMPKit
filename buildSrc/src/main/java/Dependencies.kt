@@ -3,7 +3,7 @@ object Versions {
     val target_sdk = 30
     val compile_sdk = 30
 
-    val kotlin = "1.5.10"
+    val kotlin = "1.5.20"
     val android_gradle_plugin = "7.1.0-alpha02"
 
     val buildToolsVersion = "30.0.3"
@@ -22,6 +22,7 @@ object Versions {
     val serialization = "1.2.1"
     val kotlinxDateTime = "0.2.1"
     val turbine = "0.5.2"
+    val nativeCoroutines = "0.2.0"
 
     object AndroidX {
         val appcompat = "1.4.0-alpha02"
@@ -53,6 +54,7 @@ object Deps {
     val stately = "co.touchlab:stately-common:${Versions.stately}"
     val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
     val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
+    val nativeCoroutines = "com.rickclephas.kmp:kmp-nativecoroutines-core:${Versions.nativeCoroutines}"
 
     object AndroidX {
         val appcompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appcompat}"

@@ -6,6 +6,8 @@
 //  Copyright © 2019 Touchlab. All rights reserved.
 //
 
+import Combine
+import KMPNativeCoroutinesCombine
 import UIKit
 import shared
 
@@ -13,29 +15,18 @@ class BreedsViewController: UIViewController {
 
     @IBOutlet weak var breedTableView: UITableView!
     var data: [Breed] = []
-    
+        
     let log = koin.get(objCClass: Kermit.self, parameter: "ViewController") as! Kermit
     private let refreshControl = UIRefreshControl()
 
     lazy var adapter: NativeViewModel = NativeViewModel(
-        onLoading: { /* Loading spinner is shown automatically on iOS */
-            [weak self] in
-            guard let self = self else { return }
-            if (!(self.refreshControl.isRefreshing)) {
-                self.refreshControl.beginRefreshing()
-            }
-        },
-        onSuccess: {
-            [weak self] summary in self?.viewUpdateSuccess(for: summary)
-            self?.refreshControl.endRefreshing()
-        },
-        onError: { [weak self] error in self?.errorUpdate(for: error)
-            self?.refreshControl.endRefreshing()
-        },
-        onEmpty: { /* Show "No doggos found!" message */
-            [weak self] in self?.refreshControl.endRefreshing()
-        }
+        onLoading: { /* Loading spinner is shown automatically on iOS */},
+        onSuccess: { _ in },
+        onError: { _ in },
+        onEmpty: { /* Show "No doggos found!" message */        }
     )
+    
+    var cancellable: AnyCancellable?
     
     // MARK: View Lifecycle
 
@@ -52,7 +43,36 @@ class BreedsViewController: UIViewController {
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(self.getBreedsForced), for: .valueChanged)
         refreshControl.beginRefreshing()
+        
+        
+        cancellable = createPublisher(for: adapter.breedsNativeFlow)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { completion in
+                    print("Received Completion \(completion)")
+                },
+                receiveValue: { [weak self] value in
+                    let dataState: DataStateNative<ItemDataSummary> = toDataStateNative(value)
+                    switch dataState {
+                    case .Success(let data):
+                        self?.refreshControl.endRefreshing()
+                        self?.data = data.allItems
+                        self?.viewUpdateSuccess(for: data)
+                    case .Error(let error):
+                        self?.refreshControl.endRefreshing()
+                        self?.errorUpdate(for: error)
+                    case .Empty:
+                        self?.refreshControl.endRefreshing()
+                    case .Loading:
+                        guard let self = self else { return }
+                        if (!(self.refreshControl.isRefreshing)) {
+                            self.refreshControl.beginRefreshing()
+                        }
+                    }
+                }
+            )
         adapter.refreshBreeds(forced: false)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,4 +121,33 @@ extension BreedsViewController: BreedCellDelegate {
     }
 }
 
+enum DataStateNative<T> {
+    case Success(_ data: T)
+    case Error(_ error: String)
+    case Empty
+    case Loading
+}
 
+class ObservableDataState: ObservableObject {
+    @Published var dataStateNative: DataStateNative<ItemDataSummary>
+    
+    init(dataStateNative: DataStateNative<ItemDataSummary>) {
+        self.dataStateNative = dataStateNative
+    }
+}
+
+func toDataStateNative<T>(_ dataState: DataState<T>) -> DataStateNative<T> {
+    switch dataState {
+    case let success as DataStateSuccess<T>:
+        return DataStateNative.Success(success.data!)
+    case let error as DataStateError:
+        return DataStateNative.Error(error.exception)
+    case is DataStateEmpty:
+        return DataStateNative.Empty
+    case is DataStateLoading:
+        return DataStateNative.Loading
+    default:
+        return DataStateNative.Empty
+    }
+    
+}
