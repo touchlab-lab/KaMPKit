@@ -30,7 +30,7 @@ class BreedModel : KoinComponent {
     }
 
     fun refreshBreedsIfStale(forced: Boolean = false): Flow<DataState<ItemDataSummary>> = flow {
-        emit(DataState.Loading)
+        emit(DataState.Loading())
         val currentTimeMS = clock.now().toEpochMilliseconds()
         val stale = isBreedListStale(currentTimeMS)
         val networkBreedDataState: DataState<ItemDataSummary>
@@ -48,7 +48,7 @@ class BreedModel : KoinComponent {
                     // Pass the error along
                     emit(networkBreedDataState)
                 }
-                DataState.Loading -> {
+                is DataState.Loading -> {
                     // Won't ever happen
                 }
             }

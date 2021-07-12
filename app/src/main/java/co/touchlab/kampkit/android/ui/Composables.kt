@@ -17,9 +17,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -78,11 +75,11 @@ fun FavoriteIcon(breed: Breed) {
 
 @Composable
 fun Loading(
-    lastState: DataState<ItemDataSummary>,
+    lastState: DataState<ItemDataSummary>?,
     favoriteBreed: (Breed) -> Unit
 ) {
     when (lastState) {
-        DataState.Loading -> {
+        is DataState.Loading -> {
             // Nothing here, because it's taken care of by SwipeRefresh
         }
         DataState.Empty -> {
@@ -134,21 +131,17 @@ fun MainScreen(
     dataState: DataState<ItemDataSummary>,
     favoriteBreed: (Breed) -> Unit
 ) {
-    val lastState: MutableState<DataState<ItemDataSummary>> = remember { mutableStateOf(dataState) }
     when (dataState) {
-        DataState.Loading -> {
-            Loading(lastState = lastState.value, favoriteBreed = favoriteBreed)
+        is DataState.Loading -> {
+            Loading(dataState.lastDataState, favoriteBreed = favoriteBreed)
         }
         DataState.Empty -> {
-            lastState.value = dataState
             Empty()
         }
         is DataState.Error -> {
-            lastState.value = dataState
             Error(errorState = dataState)
         }
         is DataState.Success<ItemDataSummary> -> {
-            lastState.value = dataState
             Success(successState = dataState, favoriteBreed)
         }
     }

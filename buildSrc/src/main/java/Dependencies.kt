@@ -4,7 +4,7 @@ object Versions {
     val compile_sdk = 30
 
     val kotlin = "1.5.10"
-    val android_gradle_plugin = "7.1.0-alpha02"
+    val android_gradle_plugin = "7.1.0-alpha03"
 
     val buildToolsVersion = "30.0.3"
     val coroutines = "1.5.0-native-mt"

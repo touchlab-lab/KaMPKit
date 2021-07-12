@@ -79,7 +79,7 @@ class BreedModelTest : BaseTest() {
         flowOf(model.refreshBreedsIfStale(), model.getBreedsFromCache())
             .flattenMerge().test {
                 // Loading
-                assertEquals(DataState.Loading, expectItem())
+                assertEquals(DataState.Loading(), expectItem())
                 // No Favorites
                 assertEquals(dataStateSuccessNoFavorite, expectItem())
                 // Add 1 favorite breed
@@ -98,7 +98,7 @@ class BreedModelTest : BaseTest() {
             flowOf(model.refreshBreedsIfStale(), model.getBreedsFromCache())
                 .flattenMerge().test {
                     // Loading
-                    assertEquals(DataState.Loading, expectItem())
+                    assertEquals(DataState.Loading(), expectItem())
                     assertEquals(dataStateSuccessNoFavorite, expectItem())
                     // "Like" the Australian breed
                     model.updateBreedFavorite(australianNoLike)
@@ -114,7 +114,7 @@ class BreedModelTest : BaseTest() {
             flowOf(model.refreshBreedsIfStale(true), model.getBreedsFromCache())
                 .flattenMerge().test {
                     // Loading
-                    assertEquals(DataState.Loading, expectItem())
+                    assertEquals(DataState.Loading(), expectItem())
                     // Get the new result with the Australian breed liked
                     assertEquals(dataStateSuccessFavorite, expectItem())
                     cancel()
@@ -129,7 +129,7 @@ class BreedModelTest : BaseTest() {
         ktorApi.prepareResult(successResult)
         flowOf(model.refreshBreedsIfStale(), model.getBreedsFromCache()).flattenMerge()
             .test(timeout = Duration.seconds(30)) {
-                assertEquals(DataState.Loading, expectItem())
+                assertEquals(DataState.Loading(), expectItem())
                 val oldBreeds = expectItem()
                 assertTrue(oldBreeds is DataState.Success)
                 assertEquals(
@@ -145,7 +145,7 @@ class BreedModelTest : BaseTest() {
         ktorApi.prepareResult(resultWithExtraBreed)
         flowOf(model.refreshBreedsIfStale(), model.getBreedsFromCache()).flattenMerge()
             .test(timeout = Duration.seconds(30)) {
-                assertEquals(DataState.Loading, expectItem())
+                assertEquals(DataState.Loading(), expectItem())
                 val updated = expectItem()
                 assertTrue(updated is DataState.Success)
                 assertEquals(resultWithExtraBreed.message.keys.size, updated.data.allItems.size)
