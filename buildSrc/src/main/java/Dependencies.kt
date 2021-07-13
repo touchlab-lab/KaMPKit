@@ -11,7 +11,7 @@ object Versions {
     val kermit = "0.1.9"
     val koin = "3.0.2"
     val ktlint_gradle_plugin = "10.0.0"
-    val ktor = "1.6.0"
+    val ktor = "1.6.1"
     val junit = "4.13.2"
     val material = "1.3.0"
     val desugarJdkLibs = "1.1.5"

@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.touchlab.kampkit.android.R
 import co.touchlab.kampkit.db.Breed
@@ -62,12 +63,18 @@ fun FavoriteIcon(breed: Breed) {
         if (fav) {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_border_24px),
-                contentDescription = "Favorite $breed"
+                contentDescription = stringResource(
+                    id = R.string.favorite_breed,
+                    formatArgs = arrayOf(breed.name)
+                )
             )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_24px),
-                contentDescription = "Unfavorite $breed"
+                contentDescription = stringResource(
+                    id = R.string.unfavorite_breed,
+                    formatArgs = arrayOf(breed.name)
+                )
             )
         }
     }
@@ -97,19 +104,21 @@ fun Loading(
 @Composable
 fun Empty() {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Sorry, no doggos found")
+        Text(stringResource(id = R.string.no_doggos))
     }
 }
 
 @Composable
 fun Error(errorState: DataState.Error) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
