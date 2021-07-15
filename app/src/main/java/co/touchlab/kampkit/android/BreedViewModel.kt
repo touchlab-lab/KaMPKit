@@ -24,7 +24,7 @@ class BreedViewModel : ViewModel(), KoinComponent {
     private val scope = viewModelScope
     private val breedModel: BreedModel = BreedModel()
     private val _breedStateFlow: MutableStateFlow<DataState<ItemDataSummary>> = MutableStateFlow(
-        DataState.Loading<ItemDataSummary>()
+        DataState.Loading()
     )
 
     val breedStateFlow: StateFlow<DataState<ItemDataSummary>> = _breedStateFlow
