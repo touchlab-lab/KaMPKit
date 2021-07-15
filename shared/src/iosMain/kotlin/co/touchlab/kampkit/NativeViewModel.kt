@@ -28,7 +28,7 @@ class NativeViewModel(
     private val scope = MainScope(Dispatchers.Main, log)
     private val breedModel: BreedModel = BreedModel()
     private val _breedStateFlow: MutableStateFlow<DataState<ItemDataSummary>> = MutableStateFlow(
-        DataState.Loading
+        DataState.Loading<ItemDataSummary>()
     )
 
     init {
@@ -44,7 +44,12 @@ class NativeViewModel(
                 breedModel.refreshBreedsIfStale(true),
                 breedModel.getBreedsFromCache()
             ).flattenMerge().collect { dataState ->
-                _breedStateFlow.value = dataState
+                if (dataState is DataState.Loading) {
+                    val newLoadingState = DataState.Loading(_breedStateFlow.value)
+                    _breedStateFlow.value = newLoadingState
+                } else {
+                    _breedStateFlow.value = dataState
+                }
             }
         }
         scope.launch {
@@ -63,7 +68,7 @@ class NativeViewModel(
                         log.v { "Empty" }
                         onEmpty()
                     }
-                    DataState.Loading -> {
+                    is DataState.Loading -> {
                         log.v { "Loading" }
                         onLoading()
                     }
@@ -75,8 +80,13 @@ class NativeViewModel(
     fun refreshBreeds(forced: Boolean = false) {
         scope.launch {
             log.v { "refreshBreeds" }
-            breedModel.refreshBreedsIfStale(forced).collect {
-                _breedStateFlow.value = it
+            breedModel.refreshBreedsIfStale(forced).collect { dataState ->
+                if (dataState is DataState.Loading) {
+                    val newLoadingState = DataState.Loading(_breedStateFlow.value)
+                    _breedStateFlow.value = newLoadingState
+                } else {
+                    _breedStateFlow.value = dataState
+                }
             }
         }
     }

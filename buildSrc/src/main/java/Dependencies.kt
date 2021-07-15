@@ -4,14 +4,14 @@ object Versions {
     val compile_sdk = 30
 
     val kotlin = "1.5.10"
-    val android_gradle_plugin = "7.1.0-alpha02"
+    val android_gradle_plugin = "7.1.0-alpha03"
 
     val buildToolsVersion = "30.0.3"
     val coroutines = "1.5.0-native-mt"
     val kermit = "0.1.9"
     val koin = "3.0.2"
     val ktlint_gradle_plugin = "10.0.0"
-    val ktor = "1.6.0"
+    val ktor = "1.6.1"
     val junit = "4.13.2"
     val material = "1.3.0"
     val desugarJdkLibs = "1.1.5"
@@ -32,9 +32,9 @@ object Versions {
     }
 
     object Compose {
-        const val compose = "1.0.0-rc01"
-        const val activity = "1.3.0-rc01"
-        const val accompanist = "0.13.0"
+        const val compose = "1.0.0-rc02"
+        const val activity = "1.3.0-rc02"
+        const val accompanist = "0.14.0"
     }
 }
 

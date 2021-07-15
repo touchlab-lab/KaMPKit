@@ -17,12 +17,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.touchlab.kampkit.android.R
 import co.touchlab.kampkit.db.Breed
@@ -65,12 +63,18 @@ fun FavoriteIcon(breed: Breed) {
         if (fav) {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_border_24px),
-                contentDescription = "Favorite $breed"
+                contentDescription = stringResource(
+                    id = R.string.favorite_breed,
+                    formatArgs = arrayOf(breed.name)
+                )
             )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_favorite_24px),
-                contentDescription = "Unfavorite $breed"
+                contentDescription = stringResource(
+                    id = R.string.unfavorite_breed,
+                    formatArgs = arrayOf(breed.name)
+                )
             )
         }
     }
@@ -78,11 +82,11 @@ fun FavoriteIcon(breed: Breed) {
 
 @Composable
 fun Loading(
-    lastState: DataState<ItemDataSummary>,
+    lastState: DataState<ItemDataSummary>?,
     favoriteBreed: (Breed) -> Unit
 ) {
     when (lastState) {
-        DataState.Loading -> {
+        is DataState.Loading -> {
             // Nothing here, because it's taken care of by SwipeRefresh
         }
         DataState.Empty -> {
@@ -100,19 +104,21 @@ fun Loading(
 @Composable
 fun Empty() {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Sorry, no doggos found")
+        Text(stringResource(id = R.string.no_doggos))
     }
 }
 
 @Composable
 fun Error(errorState: DataState.Error) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -134,21 +140,17 @@ fun MainScreen(
     dataState: DataState<ItemDataSummary>,
     favoriteBreed: (Breed) -> Unit
 ) {
-    val lastState: MutableState<DataState<ItemDataSummary>> = remember { mutableStateOf(dataState) }
     when (dataState) {
-        DataState.Loading -> {
-            Loading(lastState = lastState.value, favoriteBreed = favoriteBreed)
+        is DataState.Loading -> {
+            Loading(dataState.lastDataState, favoriteBreed = favoriteBreed)
         }
         DataState.Empty -> {
-            lastState.value = dataState
             Empty()
         }
         is DataState.Error -> {
-            lastState.value = dataState
             Error(errorState = dataState)
         }
         is DataState.Success<ItemDataSummary> -> {
-            lastState.value = dataState
             Success(successState = dataState, favoriteBreed)
         }
     }
