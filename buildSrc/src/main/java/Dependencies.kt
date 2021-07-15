@@ -32,9 +32,9 @@ object Versions {
     }
 
     object Compose {
-        const val compose = "1.0.0-rc01"
-        const val activity = "1.3.0-rc01"
-        const val accompanist = "0.13.0"
+        const val compose = "1.0.0-rc02"
+        const val activity = "1.3.0-rc02"
+        const val accompanist = "0.14.0"
     }
 }
 
